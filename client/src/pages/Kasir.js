@@ -58,6 +58,7 @@ const Kasir = () => {
   });
 
   const addToCart = (product) => {
+    console.log('Adding product:', product.name);
     const existingItem = cart.find(item => item.id === product.id);
     
     if (existingItem) {
@@ -70,17 +71,21 @@ const Kasir = () => {
           ? { ...item, quantity: item.quantity + 1 }
           : item
       ));
+      console.log('Updated quantity for:', product.name);
     } else {
       if (product.stock < 1) {
         alert('Stok tidak tersedia!');
         return;
       }
-      setCart([...cart, { ...product, quantity: 1 }]);
+      setCart(prevCart => [...prevCart, { ...product, quantity: 1 }]);
+      console.log('Added new item:', product.name);
     }
     
     // Close mobile modal after adding
     if (window.innerWidth <= 768) {
-      setShowMobileProducts(false);
+      setTimeout(() => {
+        setShowMobileProducts(false);
+      }, 100);
     }
   };
 
@@ -238,6 +243,7 @@ const Kasir = () => {
               <div className="empty-cart">
                 <FaShoppingCart />
                 <p>Keranjang kosong</p>
+                <span className="empty-hint">Tap tombol + untuk menambah produk</span>
               </div>
             ) : (
               cart.map(item => (
@@ -433,7 +439,17 @@ const Kasir = () => {
               <div
                 key={product.id}
                 className="product-card"
-                onClick={() => addToCart(product)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  addToCart(product);
+                }}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  addToCart(product);
+                }}
+                role="button"
+                tabIndex={0}
               >
                 <img 
                   src={product.image_url || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="150" height="150"%3E%3Crect fill="%23ddd" width="150" height="150"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3ENo Image%3C/text%3E%3C/svg%3E'} 

@@ -9,6 +9,7 @@ import Kasir from './pages/Kasir';
 import Products from './pages/Products';
 import Customers from './pages/Customers';
 import Employees from './pages/Employees';
+import Users from './pages/Users';
 import Reports from './pages/Reports';
 import Inventory from './pages/Inventory';
 import Transactions from './pages/Transactions';
@@ -47,6 +48,7 @@ function App() {
             <Route path="reports" element={<Reports />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="transactions" element={<Transactions />} />
+            <Route path="users" element={<Users />} />
           </Route>
         </Routes>
       </Router>

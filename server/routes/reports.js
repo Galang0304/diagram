@@ -100,10 +100,9 @@ router.get('/sales', authMiddleware, async (req, res) => {
     const [report] = await db.query(`
       SELECT 
         DATE_FORMAT(created_at, ?) as date,
-        COALESCE(SUM(total), 0) as sales,
+        COALESCE(SUM(total_amount), 0) as sales,
         COUNT(*) as transactions
       FROM transactions
-      WHERE status = 'completed'
       GROUP BY DATE_FORMAT(created_at, ?)
       ORDER BY date ASC
     `, [dateFormat, dateFormat]);

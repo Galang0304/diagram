@@ -3,7 +3,7 @@ import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
   FaHome, FaCashRegister, FaBox, FaUsers, FaUserTie, 
-  FaChartLine, FaWarehouse, FaReceipt, FaBars, FaSignOutAlt 
+  FaChartLine, FaWarehouse, FaReceipt, FaBars, FaSignOutAlt, FaUserCog 
 } from 'react-icons/fa';
 import './Layout.css';
 
@@ -32,6 +32,7 @@ const Layout = () => {
 
   if (user?.role === 'admin') {
     menuItems.push({ path: '/employees', icon: <FaUserTie />, label: 'Karyawan' });
+    menuItems.push({ path: '/users', icon: <FaUserCog />, label: 'Users' });
   }
 
   return (

@@ -221,66 +221,7 @@
     font-size: 12px !important;
   }
 
-  /* Kasir Page */
-  .kasir-container {
-    flex-direction: column !important;
-    height: auto !important;
-    min-height: calc(100vh - 140px);
-  }
-
-  .products-section,
-  .cart-section {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-  }
-
-  .cart-section {
-    position: fixed;
-    bottom: 60px;
-    left: 0;
-    right: 0;
-    max-height: 50vh;
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -5px 30px rgba(0,0,0,0.15);
-    transform: translateY(calc(100% - 60px));
-    transition: transform 0.3s ease;
-  }
-
-  .cart-section.open {
-    transform: translateY(0);
-  }
-
-  .cart-toggle {
-    display: flex !important;
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2196F3;
-    color: white;
-    padding: 8px 24px;
-    border-radius: 20px;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(33,150,243,0.4);
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-  }
-
-  .product-item {
-    padding: 10px !important;
-  }
-
-  .product-item h4 {
-    font-size: 12px !important;
-  }
-
-  .product-item .price {
-    font-size: 14px !important;
-  }
+  /* NOTE: Kasir styles are in Kasir.css - do not add here */
 
   /* Transaction List */
   .transaction-item {

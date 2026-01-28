@@ -242,7 +242,7 @@
   
   .main-content {
     margin-left: 0;
-    padding-bottom: 70px;
+    padding-bottom: 90px;
   }
   
   .sidebar.closed + .main-content {
@@ -254,7 +254,8 @@
   }
 
   .content {
-    padding: 20px 15px;
+    padding: 16px;
+    padding-bottom: 20px;
   }
 
   .user-info {
