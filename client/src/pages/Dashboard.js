@@ -4,7 +4,14 @@ import { FaMoneyBillWave, FaReceipt, FaUsers, FaBox, FaExclamationTriangle } fro
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const [stats, setStats] = useState(null);
+  const [stats, setStats] = useState({
+    today: { sales: 0, transactions: 0 },
+    total: { sales: 0, transactions: 0, customers: 0, products: 0 },
+    lowStock: [],
+    bestSelling: [],
+    recentTransactions: [],
+    lowStockProducts: []
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,7 +21,9 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       const response = await axios.get('/reports/dashboard');
-      setStats(response.data);
+      if (response.data) {
+        setStats(prev => ({ ...prev, ...response.data }));
+      }
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
     } finally {
@@ -90,7 +99,7 @@ const Dashboard = () => {
         <div className="dashboard-card">
           <h2>Produk Terlaris</h2>
           <div className="best-selling-list">
-            {stats.bestSelling.map((product, index) => (
+            {(stats.bestSelling || []).map((product, index) => (
               <div key={index} className="best-selling-item">
                 <div className="rank">{index + 1}</div>
                 <div className="product-info">
@@ -106,7 +115,7 @@ const Dashboard = () => {
         <div className="dashboard-card">
           <h2>Transaksi Terakhir</h2>
           <div className="recent-transactions">
-            {stats.recentTransactions.map((transaction) => (
+            {(stats.recentTransactions || []).map((transaction) => (
               <div key={transaction.id} className="transaction-item">
                 <div>
                   <h4>{transaction.invoiceNumber}</h4>
@@ -123,11 +132,11 @@ const Dashboard = () => {
         </div>
 
         {/* Low Stock Alert */}
-        {stats.lowStockProducts.length > 0 && (
+        {(stats.lowStockProducts || []).length > 0 && (
           <div className="dashboard-card alert">
             <h2><FaExclamationTriangle /> Stok Menipis</h2>
             <div className="low-stock-list">
-              {stats.lowStockProducts.map((product) => (
+              {(stats.lowStockProducts || []).map((product) => (
                 <div key={product.id} className="low-stock-item">
                   <div className="product-info">
                     <h4>{product.name}</h4>

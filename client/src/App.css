@@ -15,16 +15,32 @@ body {
   min-height: 100vh;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
+  overflow-x: hidden;
 }
 
 .App {
   min-height: 100vh;
 }
 
+/* Mobile Safe Area */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
 }
 
 ::-webkit-scrollbar-track {
